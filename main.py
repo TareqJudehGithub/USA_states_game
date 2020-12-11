@@ -25,6 +25,17 @@ while game_on:
     # User input:
     answer_state = screen.textinput(title=f"{len(correct_answers)}/50 States", prompt="Enter a state name: ", ).title()
 
+    if answer_state == "exit".title():
+        # Generating a new .csv file of states names we missed in order to learn:
+        missing_states = list()
+        for state in states_names:
+            if state not in correct_answers:
+                missing_states.append(state)
+
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn.scv")
+        break
+
     if answer_state in states_names:
         sam = Turtle()
         sam.color("purple")
@@ -43,11 +54,12 @@ while game_on:
     elif answer_state in correct_answers:
         print(f"{answer_state}")
         pass
-
     else:
         print("Wrong!")
-        game_on = False
+        continue
 
-print(correct_answers)
 
-screen.exitonclick()
+
+
+
+
