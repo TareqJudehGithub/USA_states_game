@@ -27,10 +27,7 @@ while game_on:
 
     if answer_state == "exit".title():
         # Generating a new .csv file of states names we missed in order to learn:
-        missing_states = list()
-        for state in states_names:
-            if state not in correct_answers:
-                missing_states.append(state)
+        missing_states = [state for state in states_names if state not in correct_answers]
 
         new_data = pandas.DataFrame(missing_states)
         new_data.to_csv("states_to_learn.scv")
